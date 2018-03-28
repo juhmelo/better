@@ -2,7 +2,7 @@
   (:require [clojure.test :refer :all]
             [better.core :refer :all]))
 
-(deftest ++-test
+(deftest +-test
   (testing "++ works with numbers"
     (is (= (++ 3 2) 5))
     (is (= (++ 1 2.0) 3.0))
@@ -21,5 +21,8 @@
 
   (testing "++ works with collections"
     ;; TODO write tests
-    (is (= 1 2)))
+    (is (= (++ [] []) []))
+    (is (= (++ [1] [2]) [1 2]))
+    (is (= (++ [1 2] [2]) [1 2 2]))
+    (is (= (++ [1 "2"] [3.0]) [1 "2" 3.0])))
   )
