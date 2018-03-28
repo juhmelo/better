@@ -2,7 +2,7 @@
   (:import [java.lang Number String]
            [java.util Collection Map]))
 
-(defn deep-merge [& maps]
+(defn- deep-merge [& maps]
   (if (every? map? maps)
     (apply merge-with deep-merge maps)
     (last maps)))
