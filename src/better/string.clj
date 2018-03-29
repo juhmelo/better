@@ -5,7 +5,7 @@
   `(intern
      ~*ns*
      (with-meta ~(symbol (name fn-name)) (meta ~func))
-           (partial #(when % (~func %)))))
+           (fn [& args#] (when (first args#) (apply ~func args#)))))
 
 (doseq [[sym func] (ns-publics 'clojure.string)]
   (defn-nil-safe sym func))
