@@ -9,19 +9,6 @@
     (apply merge-with deep-merge maps)
     (last maps)))
 
-(defmulti + (fn [& xs] (type (first (remove nil? xs)))))
-(defmethod + Number [& args] (reduce clojure.core/+ (remove nil? args)))
-(defmethod + String [& args] (reduce str args))
-(defmethod + Collection [& args] (reduce concat args))
-(defmethod + Map [& args] (reduce deep-merge args))
-(defmethod + nil [_] nil)
-
-(defmulti  - (fn [& xs] (type (first (remove nil? xs)))))
-(defmethod - Number [& args] (reduce clojure.core/- (remove nil? args)))
-(defmethod - String [& args] (reduce (fn [s m] (str/replace-first s m "")) args))
-(defmethod - Collection [& args] (colls- args))
-#_(defmethod - Map [& args] (reduce deep-merge args))
-
 (defn- coll- [v v2]
   (let [indexes (reduce
                   #(or %1
@@ -39,3 +26,16 @@
 
 (defn- colls- [c & cs]
   (reduce #(coll- %1 %2) c cs))
+
+(defmulti + (fn [& xs] (type (first (remove nil? xs)))))
+(defmethod + Number [& args] (reduce clojure.core/+ (remove nil? args)))
+(defmethod + String [& args] (reduce str args))
+(defmethod + Collection [& args] (reduce concat args))
+(defmethod + Map [& args] (reduce deep-merge args))
+(defmethod + nil [_] nil)
+
+(defmulti  - (fn [& xs] (type (first (remove nil? xs)))))
+(defmethod - Number [& args] (reduce clojure.core/- (remove nil? args)))
+(defmethod - String [& args] (reduce (fn [s m] (str/replace-first s m "")) args))
+(defmethod - Collection [& args] (apply colls- args))
+#_(defmethod - Map [& args] (reduce deep-merge args))
