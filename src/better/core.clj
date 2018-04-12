@@ -26,7 +26,6 @@
   (let [indexes (reduce
                   #(or %1
                        (let [[x y] %2]
-                         (prn "trying " x y)
                          (when (= v2 (subvec v x y))
                            %2)))
                   nil
