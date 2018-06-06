@@ -1,6 +1,6 @@
 # better
 
-Better implementations of simple things that should be better to begin with.
+Silly implementations of simple things.
 
 [![Build Status](https://travis-ci.org/juhmelo/better.svg?branch=master)](https://travis-ci.org/juhmelo/better)
 [![Clojars Project](https://img.shields.io/clojars/v/better.svg)](https://clojars.org/better)
